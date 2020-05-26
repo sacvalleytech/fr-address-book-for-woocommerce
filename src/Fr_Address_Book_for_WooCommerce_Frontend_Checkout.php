@@ -12,10 +12,22 @@ class Fr_Address_Book_for_WooCommerce_Frontend_Checkout {
      * 
      * @since 1.0.0
      */
-    public function init() {
+    public function init() {		
+		add_action('wp_enqueue_scripts', array($this, 'wp_enqueue_scripts'));
         add_action('woocommerce_before_checkout_billing_form', array($this, 'on_woocommerce_before_checkout_billing_form'));
         add_action('woocommerce_before_checkout_shipping_form', array($this, 'on_woocommerce_before_checkout_shipping_form'));
     }
+
+    /**
+     * Register actions and filters with WordPress.
+     * 
+     * @since 1.2.2
+     */
+	public function on_wp_enqueue_scripts() {
+		if (is_checkout()) {
+				$this->enqueue_scripts();
+			}
+	}
     
     /**
      * <code>woocommerce_before_checkout_billing_form</code> action handler.
@@ -29,8 +41,7 @@ class Fr_Address_Book_for_WooCommerce_Frontend_Checkout {
             echo '<input type="hidden" name="fabfw_address_shipping_id" value="new">';
             return;
         }
-        
-        $this->enqueue_scripts();
+
         $this->display_select_address_field('billing');
     }
     
