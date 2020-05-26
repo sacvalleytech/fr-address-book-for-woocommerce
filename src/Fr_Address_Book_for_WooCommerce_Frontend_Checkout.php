@@ -13,7 +13,7 @@ class Fr_Address_Book_for_WooCommerce_Frontend_Checkout {
      * @since 1.0.0
      */
     public function init() {		
-		add_action('wp_enqueue_scripts', array($this, 'wp_enqueue_scripts'));
+		add_action('wp_enqueue_scripts', array($this, 'on_wp_enqueue_scripts'));
         add_action('woocommerce_before_checkout_billing_form', array($this, 'on_woocommerce_before_checkout_billing_form'));
         add_action('woocommerce_before_checkout_shipping_form', array($this, 'on_woocommerce_before_checkout_shipping_form'));
     }
